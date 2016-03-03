@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 23
@@ -32,73 +35,71 @@ dependencies {
 }
 //
 //
-//def siteUrl = 'https://github.com/korkag/NaturalRecyclerView'      // Homepage URL of the library
-//def gitUrl = 'https://github.com/korkag/NaturalRecyclerView.git'   // Git repository URL
-//group = "com.korkatopia.naturalrecyclerview"                                        // Maven Group ID for the artifact
-//
-//Properties properties = new Properties()
-//properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//
-//bintray {
-//    user = properties.getProperty("bintray.user")
-//    key = properties.getProperty("bintray.apikey")
-//
-//    configurations = ['archives']
-//    pkg {
-//        repo = "maven"
-//        name = "NaturalRecyclerView"
-//        websiteUrl = siteUrl
-//        vcsUrl = gitUrl
-//        licenses = ["Apache-2.0"]
-//        publish = true
-//    }
-//}
-//
-//
-//install {
-//    repositories.mavenInstaller {
-//        // This generates POM.xml with proper parameters
-//        pom {
-//            project {
-//                packaging 'aar'
-//
-//                // Add your description here
-//                name 'Natural RecycleView. Uses natural connection between View Holder and its view type which is id of layout'
-////                url siteUrl
-//
-//                // Set your license
-//                licenses {
-//                    license {
-//                        name 'The Apache Software License, Version 2.0'
-//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
-//                developers {
-//                    developer {
-//                        id 'korkag'
-//                        name 'Iliya Gug'
-//                        email 'korkag@gmail.com'
-//                    }
-//                }
-//                scm {
-//                    connection gitUrl
-//                    developerConnection gitUrl
-//                    url siteUrl
-//
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//dependencies {
-//}
-//
-//task sourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier = 'sources'
-//}
-//
+def siteUrl = 'https://github.com/korkag/NaturalRecyclerView'      // Homepage URL of the library
+def gitUrl = 'https://github.com/korkag/NaturalRecyclerView.git'   // Git repository URL
+group = "com.korkatopia.naturalrecyclerview"                                        // Maven Group ID for the artifact
+
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "NaturalRecyclerView"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                // Add your description here
+                name 'Natural RecycleView. Uses natural connection between View Holder and its view type which is id of layout'
+//                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'korkag'
+                        name 'Iliya Gug'
+                        email 'korkag@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
 //task javadoc(type: Javadoc) {
 //    source = android.sourceSets.main.java.srcDirs
 //    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
@@ -109,7 +110,8 @@ dependencies {
 //    from javadoc.destinationDir
 //    options.encoding = 'UTF-8'
 //}
-//artifacts {
+
+artifacts {
 //    archives javadocJar
-//    archives sourcesJar
-//}
+    archives sourcesJar
+}
